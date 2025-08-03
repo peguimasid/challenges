@@ -4,23 +4,18 @@
  * @return {number}
  */
 function countStudents(students, sandwiches) {
-  const preferenceFrequencyCounter = students.reduce((map, student) => {
-    map[student] = (map[student] || 0) + 1;
-    return map;
-  }, {});
+  const count = [0, 0];
 
-  while (true) {
-    const currentSandwich = sandwiches[0];
-
-    if (!preferenceFrequencyCounter[currentSandwich]) break;
-
-    preferenceFrequencyCounter[currentSandwich]--;
-    sandwiches.shift();
+  for (const student of students) {
+    count[student]++;
   }
 
-  return Object.values(preferenceFrequencyCounter).reduce(
-    (acc, curr) => acc + curr
-  );
+  for (const sandwich of sandwiches) {
+    if (count[sandwich] === 0) break;
+    count[sandwich]--;
+  }
+
+  return count[0] + count[1];
 }
 
 console.log(countStudents([1, 1, 0, 0], [0, 1, 0, 1])); // 0
