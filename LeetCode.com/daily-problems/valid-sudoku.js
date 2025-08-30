@@ -2,7 +2,7 @@
  * @param {character[][]} board
  * @return {boolean}
  */
-const isValidRowsAndColumns = (board) => {
+const hasValidRowsAndCols = (board) => {
   for (let i = 0; i < 9; i++) {
     let row = [];
     let col = [];
@@ -23,8 +23,34 @@ const isValidRowsAndColumns = (board) => {
  * @param {character[][]} board
  * @return {boolean}
  */
+const hasValidSubBoxes = (board) => {
+  const boxes = [];
+
+  for (let i = 0; i < 9; i += 3) {
+    for (let j = 0; j < 9; j += 3) {
+      const box = [];
+      for (let k = i; k < i + 3; k++) {
+        for (let l = j; l < j + 3; l++) {
+          box.push(board[k][l]);
+        }
+      }
+      boxes.push(box);
+    }
+  }
+
+  return boxes.every((box) => {
+    const nums = box.filter((i) => i !== ".");
+    return nums.length === [...new Set(nums)].length;
+  });
+};
+
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
 function isValidSudoku(board) {
-  if (!isValidRowsAndColumns(board)) return false;
+  if (!hasValidRowsAndCols(board)) return false;
+  if (!hasValidSubBoxes(board)) return false;
 
   return true;
 }
@@ -44,7 +70,7 @@ const board1 = [
 console.log(isValidSudoku(board1)); // true
 
 const board2 = [
-  ["8", "3", ".", ".", "7", ".", ".", ".", "."],
+  ["5", "3", ".", ".", "7", ".", ".", ".", "."],
   ["6", ".", ".", "1", "9", "5", ".", ".", "."],
   [".", "9", "8", ".", ".", ".", ".", "6", "."],
   ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
@@ -55,4 +81,4 @@ const board2 = [
   [".", ".", ".", ".", "8", ".", ".", "7", "9"],
 ];
 
-// console.log(isValidSudoku(board2)); // false
+console.log(isValidSudoku(board2)); // false
