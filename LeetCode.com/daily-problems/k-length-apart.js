@@ -4,16 +4,13 @@
  * @return {boolean}
  */
 function kLengthApart(nums, k) {
-  const onePositions = nums.reduce((acc, num, index) => {
-    if (num === 1) acc.push(index);
-    return acc;
-  }, []);
+  let lastOneIndex = -1;
 
-  for (let i = 1; i < nums.length; i++) {
-    const prev = onePositions[i - 1];
-    const curr = onePositions[i];
-
-    if (curr - prev <= k) return false;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === 1) {
+      if (lastOneIndex !== -1 && i - lastOneIndex <= k) return false;
+      lastOneIndex = i;
+    }
   }
 
   return true;
