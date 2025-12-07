@@ -4,10 +4,7 @@
  * @return {number}
  */
 function countOdds(low, high) {
-  const eventCount = Math.floor((high - low) / 2);
-  const oddCount = Math.floor((high - low) / 2 + 1);
-
-  return low % 2 === 0 && high % 2 === 0 ? oddCount - 1 : oddCount;
+  return Math.floor((high + 1) / 2) - Math.floor(low / 2);
 }
 
 console.log(countOdds(3, 7)); // 3
