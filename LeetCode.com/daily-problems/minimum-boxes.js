@@ -9,14 +9,14 @@ function minimumBoxes(apple, capacity) {
   let currentBoxIndex = 0;
   let currentBoxApples = 0;
 
-  for (const amount of apple) {
-    for (let i = 0; i < amount; i++) {
-      if (currentBoxApples >= capacity[currentBoxIndex]) {
-        currentBoxIndex++;
-        currentBoxApples = 0;
-      }
-      currentBoxApples++;
+  const totalApples = apple.reduce((acc, curr) => acc + curr, 0);
+
+  for (let i = 0; i < totalApples; i++) {
+    if (currentBoxApples >= capacity[currentBoxIndex]) {
+      currentBoxIndex++;
+      currentBoxApples = 0;
     }
+    currentBoxApples++;
   }
 
   return currentBoxIndex + 1;
