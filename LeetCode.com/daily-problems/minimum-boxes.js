@@ -7,19 +7,15 @@ function minimumBoxes(apple, capacity) {
   capacity.sort((a, b) => b - a);
 
   let currentBoxIndex = 0;
-  let currentBoxApples = 0;
 
-  const totalApples = apple.reduce((acc, curr) => acc + curr, 0);
+  let totalApples = apple.reduce((acc, curr) => acc + curr, 0);
 
-  for (let i = 0; i < totalApples; i++) {
-    if (currentBoxApples >= capacity[currentBoxIndex]) {
-      currentBoxIndex++;
-      currentBoxApples = 0;
-    }
-    currentBoxApples++;
+  while (totalApples > 0) {
+    totalApples -= capacity[currentBoxIndex];
+    currentBoxIndex++;
   }
 
-  return currentBoxIndex + 1;
+  return currentBoxIndex;
 }
 
 console.log(minimumBoxes([1, 3, 2], [4, 3, 1, 5, 2])); // 2
