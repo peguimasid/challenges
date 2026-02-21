@@ -16,11 +16,20 @@ function isPrime(n) {
   return true;
 }
 
-// Example usage:
-console.log(isPrime(17)); // true
-console.log(isPrime(9)); // false
-console.log(isPrime(2)); // true
-console.log(isPrime(10)); // false
+/**
+ * @param {number} n
+ * @return {number}
+ */
+function countSetBits(n) {
+  let result = 0;
+
+  while (n > 0) {
+    if (n & 1) result++;
+    n = n >> 1;
+  }
+
+  return result;
+}
 
 /**
  * @param {number} left
@@ -28,8 +37,10 @@ console.log(isPrime(10)); // false
  * @return {number}
  */
 function countPrimeSetBits(left, right) {
-  //
+  for (let i = left; i <= right; i++) {
+    console.log(countSetBits(i));
+  }
 }
 
-// console.log(countPrimeSetBits(6, 10)); // 4
+console.log(countPrimeSetBits(6, 10)); // 4
 // console.log(countPrimeSetBits(10, 15)); // 5
