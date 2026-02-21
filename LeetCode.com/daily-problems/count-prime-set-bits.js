@@ -37,10 +37,14 @@ function countSetBits(n) {
  * @return {number}
  */
 function countPrimeSetBits(left, right) {
+  let result = 0;
+
   for (let i = left; i <= right; i++) {
-    console.log(countSetBits(i));
+    if (isPrime(countSetBits(i))) result++;
   }
+
+  return result;
 }
 
 console.log(countPrimeSetBits(6, 10)); // 4
-// console.log(countPrimeSetBits(10, 15)); // 5
+console.log(countPrimeSetBits(10, 15)); // 5
